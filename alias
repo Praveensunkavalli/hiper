@@ -1,0 +1,14 @@
+this guide will help with shortcuts - How to set helpful aliases for Kubernetes commands in Ubuntu 20.04 (maxat-akbanov.com)
+
+alias 'prepne=kubectl config use-context <cluster name>'
+
+alias 'cls=clear'
+alias 'kgc=kubectl config get-contexts'
+alias 'kuc=kubectl config use-context'
+alias 'k=kubectl'
+### azure account 1 ###
+
+
+### Azure Accounts ###
+alias acc1='export AZURE_CONFIG_DIR=~/.azure-account1'
+alias acc2='export AZURE_CONFIG_DIR=~/.azure-account2'
