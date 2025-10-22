@@ -1,0 +1,46 @@
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
+import smtplib
+
+def Allsends(From,To,Cc,Subject,*filepaths):
+# Create the root message and fill in the headers
+  message = MIMEMultipart('related')
+  message["From"] = From
+  message["Cc"] =",".join(Cc)
+  message["To"] =",".join(To)
+  message["Subject"] = Subject
+  # message.preamble = 'This is a multi-part message in MIME format.'
+
+  # Create an alternative part for plain text and HTML versions
+  msgAlternative = MIMEMultipart('alternative')
+  message.attach(msgAlternative)
+
+  # # Add plain text message
+  msgText = MIMEText('This is the alternative plain text message.')
+  msgAlternative.attach(msgText)
+
+  html_content = "<br>"
+  
+
+  for i in range(len(filepaths)):
+      html_content += f'<img src="cid:image{i+1}"><br>'
+
+    # Attach HTML content to the message
+  msgText = MIMEText(html_content, 'html')
+  msgAlternative.attach(msgText)
+
+    # Attach each image dynamically
+  for i, filepath in enumerate(filepaths):
+      with open(filepath, "rb") as fp:
+          msgImage = MIMEImage(fp.read())
+          # Set a unique content ID for each image
+          msgImage.add_header('Content-ID', f'<image{i+1}>')
+          message.attach(msgImage)
+
+
+
+  with smtplib.SMTP("<server ip>", 25) as server:
+    server.send_message(message)
+    print("mail sent")
+      
