@@ -1,0 +1,16 @@
+Showing the Current Context and Namespace in your bash Prompt
+ 
+It's often useful to know your current Context and Namspace, with out having to run any commands. This can easily be done by adding the followign snipet to your .bash_profile
+ 
+ 
+prompt_k8s() {
+  k8s_current_namespace=$(kubectl config view --minify --output 'jsonpath={..namespace}' 2>/dev/null)
+  k8s_current_context=$(kubectl config current-context 2>/dev/null)
+  
+  if [[ $? -eq 0 ]] && [[ -n "$k8s_current_context" ]]; then
+    echo -e "(${k8s_current_context} ${k8s_current_namespace}) "
+  else
+    echo "No Kubernetes context or namespace found."
+  fi
+}
+PS1+='$(prompt_k8s)'
