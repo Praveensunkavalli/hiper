@@ -1,0 +1,12 @@
+import logging
+
+try:
+
+    logsFile = "output\\Logs.log"
+    logging.basicConfig(filename=logsFile, level=logging.INFO, 
+    format='%(asctime)s:%(levelname)s:%(name)s:%(filename)20s:%(lineno)s: %(message)s')
+
+except Exception as ex:
+    logging.info("Something went wrong")
+    logging.info(ex)
+    
