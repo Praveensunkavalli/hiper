@@ -1,0 +1,11 @@
+Switch between two Accounts
+	Create a folder with account specific
+	mkdir ~/.azure-acc1
+	mkdir ~/.azure-acc2
+	Login specific to account
+	AZURE_CONFIG_DIR=~/.azure-acc1/ az login --use-device-code   --> login with acc1 account
+	AZURE_CONFIG_DIR=~/.azure-acc2/ az login --use-device-code   --> login with acc2 account
+	Add to your Existing alias file
+	### Azure Accounts ###
+	alias acc1='export AZURE_CONFIG_DIR=~/.azure-account1'
+  alias acc2='export AZURE_CONFIG_DIR=~/.azure-account2'
